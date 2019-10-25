@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE tiles-definitions PUBLIC 
+    "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" 
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="CommonTemplate" template="/WEB-INF/jsp/layout/commonLayout.jsp">
+		
+		<put-attribute name="header" value="/WEB-INF/jsp/layout/leftnav.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/layout/topnav.jsp" />
+				
+		<put-attribute name="footer" value="/WEB-INF/jsp/layout/footer.jsp" />
+		
+		
+		
+	</definition>
+	
+	<definition name="CommonTemplateHome"
+		template="/layout/commonLayoutHome.jsp">
+		<put-attribute name="title" value="::: Metsys  :::" />
+		<put-attribute name="header"
+			value="/layout/header/header_home.jsp" />
+		<put-attribute name="footer" value="" />
+	</definition>
+			
+	<definition name="initlayout" extends="CommonTemplateHome">
+		<put-attribute name="title" value="::: Metsys -  :::" />
+		<put-attribute name="body" value="/Dashboard.jsp" />
+	</definition>
+	
+			
+	<definition name="wxmailing" extends="CommonTemplateHome">
+		<put-attribute name="title" value="::: Metsys -  :::" />
+		<put-attribute name="body" value="/pages/wxmailing/wxmailing.jsp" />
+	</definition>	
+	
+	<definition name="wxmailList" extends="CommonTemplateHome">
+		<put-attribute name="title" value="::: Metsys -  :::" />
+		<put-attribute name="body" value="/pages/wxmailing/wxmailList.jsp" />
+	</definition>	
+</tiles-definitions>

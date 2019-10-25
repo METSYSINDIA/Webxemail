@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.action.extension" value="do,action,," />
+	<constant name="struts.devMode" value="false" />	
+	<constant name="struts.i18n.reload" value="true" />
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+	<constant name="struts.multipart.maxSize" value="52428800" />
+	<constant name="struts.custom.i18n.resources" value="application_field_names,responce_codes,application_queries,MessageResources,ApplicationConstants,DBQuery, application_dynamic_queries, app_field_names,app_queries_policysearch" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+    <constant name="struts.mapper.action.prefix.enabled" value="true" />
+	
+	<package name="intercept" extends="tiles-default,json-default">
+		<interceptors>
+			<interceptor name="noCacheIntercept" class="com.maan.common.util.NoCacheInterceptor" />
+			<interceptor name="SessionIntercept" class="com.maan.common.util.SessionInterceptor" />
+			<interceptor-stack name="noCacheStack">
+				<interceptor-ref name="noCacheIntercept" />				
+     			<interceptor-ref name="prepare"/>
+				<interceptor-ref name="defaultStack">
+					<param name="exception.logEnabled">true</param>
+					<param name="exception.logLevel">ERROR</param>
+				</interceptor-ref>
+				<interceptor-ref name="token">
+					<param name="excludeMethods">*</param>
+				</interceptor-ref>
+				<interceptor-ref name="fileUpload">
+					<param name="maximumSize">52428800</param>
+					<param name="contentType">application/octet-stream</param>
+				</interceptor-ref>
+				<interceptor-ref name="actionMappingParams" />
+				<interceptor-ref name="params"> 
+					<param name="excludeParams">dojo\..*,^struts\..*</param>
+				</interceptor-ref>
+				<interceptor-ref name="conversionError" />
+				<interceptor-ref name="validation"/>
+				<interceptor-ref name="workflow"/>
+			</interceptor-stack>
+			<interceptor-stack name="SessionCheckStack">
+				<interceptor-ref name="SessionIntercept" />
+				<interceptor-ref name="noCacheStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="SessionCheckStack"></default-interceptor-ref>
+
+		<global-results>
+			<result name="SessionExpired" type="tiles">login</result>
+			<result name="invalid.token" type="tiles">login</result>
+			<result name="unhandledException" type="tiles">login</result>
+			<result name="history" type="tiles">history</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="unhandledException" />
+		</global-exception-mappings>
+	</package>
+	
+	<package name="default" extends="intercept">	 
+		
+		<action name="*Login" class="com.maan.common.login.LogInAction" method="{1}">
+			<interceptor-ref name="noCacheStack"></interceptor-ref>
+			<result name="input">/index.jsp</result>
+	    	<result name="success">/chart.jsp</result>
+	    	  <result name="tilesinit" type="tiles">initlayout</result>
+	    </action>
+	   <action name="*move" class="com.maan.common.login.LogInAction" method="{1}">
+	  	 <result name="tilesinit" type="tiles">initlayout</result>
+	   </action>
+	   <action name="*Wxmail" class="com.webxmail.mailing.WebxMailAction" method="{1}">
+	   	<interceptor-ref name="noCacheStack"></interceptor-ref>
+	  	 <result name="wxmailing" type="tiles">wxmailing</result> 
+	  	<result name="wxmailList" type="tiles">wxmailList</result> 
+	  	 
+	  	 
+	   </action>
+	</package>
+	 
+</struts>
