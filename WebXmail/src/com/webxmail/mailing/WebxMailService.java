@@ -7,128 +7,129 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.webxmail.common.Util.FieldErrorUtil;
 import com.webxmail.common.constant.Validation;
 import com.webxmail.mailing.impl.WebxMailDAOImpl;
 
 public class WebxMailService {
 	WebxMailDAO DAO=new WebxMailDAOImpl();
-	List<String> errorList=new ArrayList<String>();
+	List<FieldErrorUtil> errorList=new ArrayList<FieldErrorUtil>();
 	public List<Map<String, Object>> getCommonConstList(String constType, Object[] obj) {
 		return DAO.getCommonConstList(constType, obj) ;
 	}
-	public List<String> validateData(WebxMailBean bean){
-		errorList=new ArrayList<String>();
+	public List<FieldErrorUtil> validateData(WebxMailBean bean){
+		errorList=new ArrayList<FieldErrorUtil>();
 
 		/*
 		 * if(StringUtils.isBlank(bean.getWxMailingSid ())) {
-		 * addActionError("Please Enter "); }
+		 * addFieldError("","Please Enter "); }
 		 */
 		if(StringUtils.isBlank(bean.getSourceFile ())) {
-			addActionError("Please Enter Source Name ");
+			addFieldError("sourceFile","Please Enter Source Name ");
 		}
 		/*
 		 * if(StringUtils.isBlank(bean.getSourceTextCount ())) {}
 		 */		
 		if(StringUtils.isBlank(bean.getEmailSubject ())) {
-			 addActionError("Please Enter Email Subject ");
+			 addFieldError("emailSubject","Please Enter Email Subject ");
 		 }
 		if(StringUtils.isBlank(bean.getEmailForm ())) {
-			 addActionError("Please Enter Email From ");
+			 addFieldError("emailForm","Please Enter Email From ");
 		}
 		if(StringUtils.isBlank(bean.getFromMail ())) {
-			 addActionError("Please Enter From Email ");
+			 addFieldError("fromMail","Please Enter From Email ");
 		}else if(!Validation.isValidEmail(bean.getFromMail ())) {
-			addActionError("Please Enter Valid From Email Id");
+			addFieldError("fromMail","Please Enter Valid From Email Id");
 			
 		}
 		if(StringUtils.isBlank(bean.getUrlDomain ())) {
-			 addActionError("Please Enter URL Domain ");
+			 addFieldError("urlDomain","Please Enter URL Domain ");
 		}
 		if(StringUtils.isBlank(bean.getWebxId ())) {
-			 addActionError("Please Enter Webx ID");
+			 addFieldError("webxId","Please Enter Webx ID");
 		}
 		if(StringUtils.isBlank(bean.getPowerMtaName ())) {
-			 addActionError("Please Enter Power MTA Name");
+			 addFieldError("powerMtaName","Please Enter Power MTA Name");
 		}
 		if(StringUtils.isBlank(bean.getReturnPath ())) {
-			 addActionError("Please Enter Return Path ");
+			 addFieldError("returnPath","Please Enter Return Path ");
 		}
 		if(StringUtils.isBlank(bean.getTestMail ())) {
-			 addActionError("Please Enter Test Mail");
+			 addFieldError("testMail","Please Enter Test Mail");
 		}else if(!Validation.isValidEmail(bean.getTestMail ())) {
-			addActionError("Please Enter Valid Test Email Id");
+			addFieldError("testMail","Please Enter Valid Test Email Id");
 			
 		}
 	
 		if(StringUtils.isBlank(bean.getCheckMode ())) {
-			 addActionError("Please Choose Check Mode ");
+			 addFieldError("checkMode","Please Choose Check Mode ");
 		}
 		if(StringUtils.isBlank(bean.getHeadType ())) {
-			addActionError("Please Choose Header Type");
+			addFieldError("headType","Please Choose Header Type");
 		}
 		if(StringUtils.isBlank(bean.getCheckProcess ())) {
-			addActionError("Please Choose Check Process ");
+			addFieldError("checkProcess","Please Choose Check Process ");
 		}
 		if(StringUtils.isBlank(bean.getCreateiveType ())) {
-			addActionError("Please Choose Creative Type ");
+			addFieldError("createiveType","Please Choose Creative Type ");
 		}
 		if(StringUtils.isBlank(bean.getMailMode ())) {
-			addActionError("Please Choose Mail Mode");
+			addFieldError("mailMode","Please Choose Mail Mode");
 		}
 		if(StringUtils.isBlank(bean.getMailProcess ())) {
-			addActionError("Please Choose Mail Process");
+			addFieldError("mailProcess","Please Choose Mail Process");
 		}
 		if(StringUtils.isBlank(bean.getMta ())) {
-			addActionError("Please Choose MTA");
+			addFieldError("mta","Please Choose MTA");
 		}
 		if(StringUtils.isBlank(bean.getNegative ())) {
-			addActionError("Please Choose Negative");
+			addFieldError("negative","Please Choose Negative");
 		}
 		if(StringUtils.isBlank(bean.getCheckCount ())) {
-			addActionError("Please Enter Check Count");
+			addFieldError("checkCount","Please Enter Check Count");
 		}else if(!StringUtils.isNumeric(bean.getCheckCount ())) {
-			addActionError("Please Enter Check Count");
+			addFieldError("checkCount","Please Enter Check Count");
 		}
 		if(StringUtils.isBlank(bean.getIpQueueLine ())) {
-			addActionError("Please Enter Ip Queue Limit");
+			addFieldError("ipQueueLine","Please Enter Ip Queue Limit");
 		}else if(!StringUtils.isNumeric(bean.getIpQueueLine ())) {
-			addActionError("Please Enter Valid Ip Queue Limit");
+			addFieldError("ipQueueLine","Please Enter Valid Ip Queue Limit");
 		}
 		if(StringUtils.isBlank(bean.getInstance ())) {
-			addActionError("Please Enter Instance");
+			addFieldError("instance","Please Enter Instance");
 		}else if(!StringUtils.isNumeric(bean.getInstance ())) {
-			addActionError("Please Enter Valid Instance");
+			addFieldError("instance","Please Enter Valid Instance");
 		}
 		if(StringUtils.isBlank(bean.getMailPermit ())) {
-			addActionError("Please Enter Mail Per Min");
+			addFieldError("mailPermit","Please Enter Mail Per Min");
 		}
 		else if(!StringUtils.isNumeric(bean.getMailPermit ())){
-			addActionError("Please Enter Valid Mail Per Min");
+			addFieldError("mailPermit","Please Enter Valid Mail Per Min");
 
 		}
 		if(StringUtils.isBlank(bean.getUrlPattern ())) {
-			addActionError("Please Select URL pattern");
+			addFieldError("urlPattern","Please Select URL pattern");
 		}
 		if(StringUtils.isBlank(bean.getImagePattern ())) {
-			addActionError("Please Select Image pattern");
+			addFieldError("imagePattern","Please Select Image pattern");
 		}
 		if(StringUtils.isBlank(bean.getTextLimit ())) {
-			addActionError("Please Enter Text Limit");
+			addFieldError("textLimit","Please Enter Text Limit");
 		}
 		if(StringUtils.isBlank(bean.getImageFolder ())) {
-			addActionError("Please Enter Image Folder");
+			addFieldError("imageFolder","Please Enter Image Folder");
 		}
 		if(StringUtils.isBlank(bean.getLandingPageImg ())) {
-			addActionError("Please Enter Landing Page Image");
+			addFieldError("landingPageImg","Please Enter Landing Page Image");
 		}
 		if(StringUtils.isBlank(bean.getOptoutPageImg ())) {
-			addActionError("Please Enter OptOut Page Image");
+			addFieldError("optoutPageImg","Please Enter OptOut Page Image");
 		}
 		if(StringUtils.isBlank(bean.getMailContent ())) {
-			addActionError("Please Enter Mail Content");
+			addFieldError("mailContent","Please Enter Mail Content");
 		}
 		/*if(StringUtils.isBlank(bean.getMailContent ())) {
-			addActionError(MessageFormat.format(ErrorMSG.PLS_ENTER_ERR, new Object[] {"Mail Content"}));
+			addFieldError("",MessageFormat.format(ErrorMSG.PLS_ENTER_ERR, new Object[] {"Mail Content"}));
 		}*/
 
 
@@ -137,7 +138,12 @@ public class WebxMailService {
 		return errorList;
 	}
 	private void addActionError(String actionError) {
-		errorList.add(actionError);
+		//errorList.add(actionError);
+		
+	}
+	
+	private void addFieldError(String fieldName,String errorMessage) {
+		errorList.add(new FieldErrorUtil(fieldName,errorMessage));
 		
 	}
 	public void insertMailData(WebxMailBean bean) {

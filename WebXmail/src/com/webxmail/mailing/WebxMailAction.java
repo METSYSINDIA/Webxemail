@@ -2,12 +2,11 @@ package com.webxmail.mailing;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
-import org.apache.commons.lang.StringUtils;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.webxmail.common.Util.FieldErrorUtil;
 import com.webxmail.common.constant.WXConstant;
 
 public class WebxMailAction extends ActionSupport implements ModelDriven<WebxMailBean>{
@@ -16,7 +15,7 @@ public class WebxMailAction extends ActionSupport implements ModelDriven<WebxMai
 	 * Author Ahamed Ibrahim
 	 *  Oct 1,2019 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6677091252031583948L;
 	private WebxMailBean bean=new WebxMailBean();
 	private WebxMailService service=new WebxMailService();
 
@@ -50,6 +49,8 @@ public class WebxMailAction extends ActionSupport implements ModelDriven<WebxMai
 	
 	public String save() {
 		validateData();
+		//addFieldError("emailSubject", "emailSubject Test");
+
 		if(!hasActionErrors()) {
 			service.insertMailData(bean);
 		}
@@ -61,15 +62,16 @@ public class WebxMailAction extends ActionSupport implements ModelDriven<WebxMai
 		return "wxmailing";
 	}
 	private void validateData() {
-		List<String> errorList=service.validateData(bean);
+		List<FieldErrorUtil> errorList=service.validateData(bean);
 		setErrorList(errorList);
 		
 
 	}
 
-	private void setErrorList(List<String> errorList) {
+	private void setErrorList(List<FieldErrorUtil> errorList) {
 		if(errorList.size()>0)
-			errorList.stream().forEach(err->addActionError(err));
+			//addFieldError(fieldName, errorMessage);
+			errorList.stream().forEach(err->addFieldError(err.getFieldError(), err.getFieldErrorMsg()));
 
 	}
 

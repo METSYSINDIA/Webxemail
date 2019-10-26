@@ -72,7 +72,10 @@ line-height: 1.6;
   margin-left: 10px; // space out consecutive inline controls
 }
 
-
+.errorMessage {
+  font-weight: bold;
+  color: red;
+}
 </style>
 
 <body id="page-top">
@@ -98,18 +101,20 @@ line-height: 1.6;
          <div class="column">
          <s:form name="mailInfo" id="mailInfo" theme="simple" action="">
          
-         <s:if test="hasActionErrors()">
+        <%--  <s:if test="hasActionErrors()">
 				<div class="row">
 						<font color="red"><s:actionerror/></font>
 				</div>
-			</s:if>	
+			</s:if>	 --%>
          <div class="row">
        		<div class="col-xs-12 col-md-12">
 			    <div class="input-group">
 	               <div class="col-xs-12 col-md-4">
+	               
 	                  <label><b><s:text name="Source name:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	              `		 <s:fielderror fieldName="sourceFile"/>
 	                    <s:textfield name="sourceFile" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
 	                </div>
 	             </div>
@@ -119,10 +124,12 @@ line-height: 1.6;
 			<div class="col-xs-12 col-md-12">
 			    <div class="input-group">
 	               <div class="col-xs-12 col-md-4">
+	               
 	                  <label><b><s:text name="Email Subject:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
-	                    <s:textfield name="emailSubject" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
+	                       <s:fielderror fieldName="emailSubject"/>
+	                    <s:textfield name="emailSubject" cssErrorClass="emailSubject" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
 	                </div>
 	             </div>
 	             </div>
@@ -135,6 +142,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="Email From:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	                	<s:fielderror fieldName="emailForm"/>
 	                    <s:textfield name="emailForm" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
 	                </div>
 	             </div>
@@ -145,6 +153,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="From Email:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	               		<s:fielderror fieldName="fromMail"/>
 	                    <s:textfield name="fromMail" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
 	                </div>
 	             </div>
@@ -158,6 +167,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="URL Domain:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	              		 <s:fielderror fieldName="urlDomain"/>
 	                    <s:textfield name="urlDomain" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
 	                </div>
 	             </div>
@@ -168,6 +178,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="Webx ID:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	               		<s:fielderror fieldName="webxId"/>
 	                    <s:textfield name="webxId" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
 	                </div>
 	             </div>
@@ -180,6 +191,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="PowerMTA Name:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	               		<s:fielderror fieldName="powerMtaName"/>
 	                    <s:textfield name="powerMtaName" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
 	                </div>
 	             </div>
@@ -190,6 +202,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="Return Path:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	              		 <s:fielderror fieldName="returnPath"/>
 	                    <s:textfield name="returnPath" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
 	                </div>
 	             </div>
@@ -202,6 +215,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="Test Mail:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	            	   <s:fielderror fieldName="testMail"/>
 	                    <s:textfield name="testMail" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
 	                </div>
 	             </div>
@@ -214,6 +228,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="Header Type:"/></b></label>
 	               </div>
 	               <div class="input-group">
+	                <s:fielderror fieldName="headType"/>
  							 <s:radio name="headType" cssClass="radio" list="headTypeList" listKey="WX_CONSTANT_VAL" listValue="WX_CONSTANT_NAME" value="headType" />	               
  					 </div>
 	             </div>
@@ -223,6 +238,7 @@ line-height: 1.6;
 	               <div class="col-xs-12 col-md-4">
 	                  <label><b><s:text name="Check Mode:"/></b></label>
 	               </div>
+	               <s:fielderror fieldName="checkMode"/>
  							 <s:radio  name="checkMode" list="checkModeList"  listKey="WX_CONSTANT_VAL" listValue="WX_CONSTANT_NAME" value="checkMode" />	               
 	             </div>
 	             </div>
@@ -234,6 +250,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="Creative Type:"/></b></label>
 	               </div>
 	               <div class="input-group">
+	               			<s:fielderror fieldName="createiveType"/>
  							 <s:radio name="createiveType" cssClass="radio" list="creativeTypeList" listKey="WX_CONSTANT_VAL" listValue="WX_CONSTANT_NAME" value="createiveType" />	               
  					 </div>
 	             </div>
@@ -243,6 +260,7 @@ line-height: 1.6;
 	               <div class="col-xs-12 col-md-4">
 	                  <label><b><s:text name="Check Process:"/></b></label>
 	               </div>
+	               			<s:fielderror fieldName="checkProcess"/>
  							 <s:radio  name="checkProcess" list="checkProcessList"  listKey="WX_CONSTANT_VAL" listValue="WX_CONSTANT_NAME" value="checkProcess" />	               
 	             </div>
 	             </div>
@@ -255,6 +273,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="Mode:"/></b></label>
 	               </div>
 	               <div class="input-group">
+	               			<s:fielderror fieldName="mailMode"/>
  							 <s:radio name="mailMode" cssClass="radio" list="wxModeList" listKey="WX_CONSTANT_VAL" listValue="WX_CONSTANT_NAME" value="mailMode" />	               
  					 </div>
 	             </div>
@@ -264,6 +283,7 @@ line-height: 1.6;
 	               <div class="col-xs-12 col-md-4">
 	                  <label><b><s:text name=" Process:"/></b></label>
 	               </div>
+	               			<s:fielderror fieldName="mailProcess"/>	
  							 <s:radio  name="mailProcess" list="wxProcessList"  listKey="WX_CONSTANT_VAL" listValue="WX_CONSTANT_NAME" value="mailProcess" />	               
 	             </div>
 	             </div>
@@ -275,6 +295,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="MTA:"/></b></label>
 	               </div>
 	               <div class="input-group">
+	               			<s:fielderror fieldName="mta"/>	
  							 <s:radio name="mta" cssClass="radio" list="wxMtaList" listKey="WX_CONSTANT_VAL" listValue="WX_CONSTANT_NAME" value="mta" />	               
  					 </div>
 	             </div>
@@ -283,7 +304,7 @@ line-height: 1.6;
 			    <div class="input-group">
 	               <div class="col-xs-12 col-md-4">
 	                  <label><b><s:text name=" Negative:"/></b></label>
-	               </div>
+	               </div>	
  							 <s:radio  name="negative" list="negativeList"  listKey="WX_CONSTANT_VAL" listValue="WX_CONSTANT_NAME" value="negative" />	               
 	             </div>
 	             </div>
@@ -295,6 +316,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="Check Count:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	               		<s:fielderror fieldName="mta"/>	
 	                    <s:textfield name="checkCount" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
 	                </div>
 	             </div>
@@ -305,6 +327,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="IP Queue Limit:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	               		<s:fielderror fieldName="ipQueueLine"/>	
 	                    <s:textfield name="ipQueueLine" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
 	                </div>
 	             </div>
@@ -318,6 +341,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="Instance:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	               		<s:fielderror fieldName="instance"/>	
 	                    <s:textfield name="instance" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
 	                </div>
 	             </div>
@@ -328,6 +352,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="Mail Per Min:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	               		<s:fielderror fieldName="mailPermit"/>	
 	                    <s:textfield name="mailPermit" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
 	                </div>
 	             </div>
@@ -340,6 +365,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="URL Pattern:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	               		<s:fielderror fieldName="urlPattern"/>	
 	                    <s:select name="urlPattern" list="urlPatternList"  listKey="WX_CONSTANT_VAL" listValue="WX_CONSTANT_NAME" disabled="#disable" tooltip=""  cssClass="nav-link dropdown-toggle"  maxlength="100" />
 	                </div>
 	             </div>
@@ -350,6 +376,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="Image Pattern:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	               		<s:fielderror fieldName="imagePattern"/>	
 	                    <s:select name="imagePattern" list="imgPatternList"  listKey="WX_CONSTANT_VAL" listValue="WX_CONSTANT_NAME" disabled="#disable" tooltip=""  cssClass="nav-link dropdown-toggle"  maxlength="100" />
 	                </div>
 	             </div>
@@ -362,6 +389,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="TextLimit:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	               		<s:fielderror fieldName="textLimit"/>	
 	                    <s:textfield name="textLimit" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
 	                </div>
 	             </div>
@@ -372,6 +400,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="Image Folder:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	               		<s:fielderror fieldName="imageFolder"/>	
 	                    <s:textfield name="imageFolder" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
 	                </div>
 	             </div>
@@ -384,6 +413,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="Landing Page Image:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	               		<s:fielderror fieldName="imageFolder"/>
 	                    <s:textfield name="landingPageImg" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
 	                </div>
 	             </div>
@@ -391,9 +421,11 @@ line-height: 1.6;
 	            <div class="col-xs-12 col-md-6">
 			    <div class="input-group">
 	               <div class="col-xs-12 col-md-4">
+	               
 	                  <label><b><s:text name="OptOut page Image:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	               <s:fielderror fieldName="optoutPageImg"/>
 	                    <s:textfield name="optoutPageImg" disabled="#disable" tooltip="" cssClass="form-control  charspaceOnly" maxlength="100" />
 	                </div>
 	             </div>
@@ -406,6 +438,7 @@ line-height: 1.6;
 	                  <label><b><s:text name="Mail Content:"/></b></label>
 	               </div>
 	               <div class="col-xs-12 col-md-8">
+	               		 <s:fielderror fieldName="mailContent"/>
 						<s:textarea  name="mailContent" cols="40" rows="5"/>
 	                </div>
 	             </div>
@@ -509,8 +542,6 @@ line-height: 1.6;
   <!-- Page level plugins -->
 
   <!-- Page level custom scripts -->
-  <script src="js/demo/chart-area-demo.js"></script>
-  <script src="js/demo/chart-pie-demo.js"></script>
 <script type="text/javascript">
 function fnSubmit(){
 		document.mailInfo.action='${pageContext.request.contextPath}/saveWxmail.do';
