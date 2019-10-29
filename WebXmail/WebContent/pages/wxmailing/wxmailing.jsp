@@ -24,7 +24,7 @@
 }
 
 .columnright {
-  float: right;
+  float: left;
   width: 22%;
   padding: 10px;
 }
@@ -45,9 +45,6 @@ label {
 .break {
   flex-basis: 100%;
   height: 0;
-}
-div.row{
-line-height: 1.6;
 }
 
 .radio-inline,
@@ -101,11 +98,10 @@ line-height: 1.6;
          <div class="column">
          <s:form name="mailInfo" id="mailInfo" theme="simple" action="">
          
-        <%--  <s:if test="hasActionErrors()">
+          <s:if test="hasActionErrors()">
 				<div class="row">
-						<font color="red"><s:actionerror/></font>
 				</div>
-			</s:if>	 --%>
+			</s:if>	 
          <div class="row">
        		<div class="col-xs-12 col-md-12">
 			    <div class="input-group">
@@ -439,11 +435,17 @@ line-height: 1.6;
 	               </div>
 	               <div class="col-xs-12 col-md-8">
 	               		 <s:fielderror fieldName="mailContent"/>
-						<s:textarea  name="mailContent" cols="40" rows="5"/>
+						<s:textarea  name="mailContent" id="mailContent"  onkeyup="addFields()" onchange="addFields()" cols="40" rows="5"/>
+						<a href="#" id="filldetails" onclick="addFields()">Fill Details</a>
 	                </div>
 	             </div>
 			</div>
 		</div>
+		<div class="row">
+		<div class="col-xs-12 col-md-12">
+			    <div id="container"></div>
+			</div>
+			</div>
 		<div class="row">
 				<div class="col-xs-12 col-md-6" align="right">
 					<input type="button" name="submitB" value="Submit" class="btn btn-sm btn-danger" onclick="fnSubmit()"/>
@@ -541,12 +543,20 @@ line-height: 1.6;
 
   <!-- Page level plugins -->
 
-  <!-- Page level custom scripts -->
 <script type="text/javascript">
 function fnSubmit(){
 		document.mailInfo.action='${pageContext.request.contextPath}/saveWxmail.do';
 		document.mailInfo.submit();
 	}
+function addFields(){
+    // Number of inputs to create
+   //  alert('number');
+    var mailcont = document.getElementById("mailContent").value;
+    document.getElementById("container").innerHTML = mailcont;
+
+ //   var container = document.getElementById("container");
+    }
+	
 	</script>
 	
 
